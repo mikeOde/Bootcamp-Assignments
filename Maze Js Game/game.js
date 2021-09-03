@@ -30,7 +30,8 @@ window.onload=function(){
     }
 
     function userCheating(){
-        if(gameEnded == false){                 //this condition controls not showing the cheating message after user wins the round 
+        if(gameEnded == false && crossedBorder == false){   
+            gameEnded = true;              //this condition controls not showing the cheating message after user wins the round 
             isCheating = true;
             document.getElementById("status").innerHTML  = "Cheating is not allowed";
         }
