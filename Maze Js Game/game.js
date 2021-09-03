@@ -62,7 +62,10 @@ window.onload=function(){
             } else {
                 score += 5;
                 document.getElementById("status").innerHTML  = "You Won! Your score is: " + score;
-        
+                var boundaries = document.getElementsByClassName("boundary");
+                for (var i = 0; i < boundaries.length - 1; i++) {
+                    boundaries[i].style.backgroundColor = "green";
+                }
                 console.log(score);
             }
             gameEnded = true;
