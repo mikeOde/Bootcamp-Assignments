@@ -1,6 +1,31 @@
 <?php
 
 require_once('../php/component.php');
+session_start();
+
+if(isset($_POST["add"])){
+	// print_r($_POST["product_id"]);
+	if(isset($_SESSION["cart"])){
+		$item_array_id = array_column($_SESSION["cart"], "product_id");
+		if(in_array($_POST["product_id"], $item_array_id)){
+			echo"<script>alert(\"Product is already in the cart\")</script>";
+			echo "<script>window.location = \"mike_farm.php\"</script>";
+		}else{
+			$count = count($_SESSION["cart"]);
+			$item_array = array(
+				'product_id'=>$_POST["product_id"]
+			);
+			$_SESSION["cart"][$count] = $item_array;
+			
+		}
+	}else{
+		$item_array = array(
+			'product_id'=>$_POST["product_id"]
+		);
+		//create new session variable
+		$_SESSION["cart"][0]=$item_array;
+	}
+}
 
 ?>
 
@@ -68,7 +93,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 				<div class="contact-number">
                     <p>
 					<?php
-                    session_start();
+                    
                     echo "Welcome ".$_SESSION['user_email'];
                     ?>
                     </p>
@@ -203,10 +228,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 		</div>
 	<div class="container">
 		<div class="row text-center py-5">
+			<!-- dynamic products display -->
 			<?php
-			$result
-		
-			
+			component();
 			?>
 
 			</div>
