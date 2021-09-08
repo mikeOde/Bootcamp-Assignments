@@ -102,7 +102,7 @@ session_start();
             </div>
 
           </form>
-          <p class="mt-20">Already hava an account ?<a href="login.php"> Login</a></p>
+          <p class="mt-20">Already hava an account ?<a href="index.php"> Login</a></p>
         </div>
       </div>
     </div>

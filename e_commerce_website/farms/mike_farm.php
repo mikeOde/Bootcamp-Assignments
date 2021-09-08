@@ -1,10 +1,11 @@
 <?php
 
 require_once('../php/component.php');
-session_start();
+require_once('../php/cart.php');
 
+$_SESSION["farmerEmail"] = "mikeayoub@outlook.com";
 if(isset($_POST["add"])){
-	// print_r($_POST["product_id"]);
+	
 	if(isset($_SESSION["cart"])){
 		$item_array_id = array_column($_SESSION["cart"], "product_id");
 		if(in_array($_POST["product_id"], $item_array_id)){
@@ -26,6 +27,7 @@ if(isset($_POST["add"])){
 		$_SESSION["cart"][0]=$item_array;
 	}
 }
+$total = $_SESSION["total_price"]
 
 ?>
 
@@ -80,7 +82,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  
 </head>
 
 <body id="body">
@@ -102,8 +104,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 			</div>
 			<div class="col-md-4 col-xs-12 col-sm-4">
 				<div class="logo text-center">
-					<a href="customer_home.html">
-						Efarm
+					<a href="../customer_home.php">
+						Mike's Farm
 					</a>
 				</div>
 			</div>
@@ -114,44 +116,21 @@ FACEBOOK: https://www.facebook.com/themefisher
 						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
 								class="tf-ion-android-cart"></i>Cart</a>
 						<div class="dropdown-menu cart-dropdown">
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="#!">
-									<img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="#!">
-									<img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
+							<?php
+							cartItems();
+							?>
 
 							<div class="cart-summary">
 								<span>Total</span>
-								<span class="total-price">$1799.00</span>
+								<span class="total-price">
+									<?php
+									echo "$total"
+									?>
+								</span>
 							</div>
 							<ul class="text-center cart-buttons">
-								<li><a href="cart.html" class="btn btn-small">View Cart</a></li>
-								<li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
+								
+								<li><a href="!#" class="btn btn-small btn-solid-border">Checkout</a></li>
 							</ul>
 						</div>
 
@@ -186,7 +165,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 
 					<!-- Home -->
 					<li class="dropdown ">
-						<a href="customer_home.html">Home</a>
+						<a href="../customer_home.php">Home</a>
 					</li><!-- / Home -->
 
 
@@ -203,9 +182,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 									<ul>
 										<li class="dropdown-header">Farms</li>
 										<li role="separator" class="divider"></li>
-										<li><a href="farms/mike_farm.html">Mike's farm</a></li>      
-										<li><a href="farms/dani_farm.html">Dani's farm</a></li>   
-										<li><a href="farms/raymond_farm.html">Raymond's farm</a></li>	    
+										<li><a href="mike_farm.php">Mike's farm</a></li>      
+										<li><a href="dani_farm.php">Dani's farm</a></li>   
+										<li><a href="raymond_farm.php">Raymond's farm</a></li>	    
 									</ul>
 								</div>
 							</div><!-- / .row -->
@@ -278,7 +257,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 						<a href="contact.html">PRIVACY POLICY</a>
 					</li>
 				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
+				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <b>MikeOde</b></p>
 			</div>
 		</div>
 	</div>

@@ -94,6 +94,10 @@ a, a:focus, a:hover {
   color: #000;
 }
 
+#product_image {
+  height: 300px;
+}
+
 blockquote {
   font-size: 18px;
   border-color: #000;

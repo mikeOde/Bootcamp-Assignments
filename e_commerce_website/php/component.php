@@ -1,12 +1,13 @@
 <?php 
-
+session_start();
 
 
 
 
 function component(){
 	include "connection.php";
-	$farmer_email = "mikeayoub@outlook.com";
+	$farmer_email = $_SESSION["farmerEmail"];
+	$_SESSION["farmerEmail"] = $farmer_email;
 	$sql1 = "SELECT * FROM users WHERE email=?";
 	$stmt1 = $connection->prepare($sql1);
 	$stmt1-> bind_param("s", $farmer_email);
@@ -32,12 +33,14 @@ function component(){
 		$product_image = $product_data["image"];
 		$product_description = $product_data["description"];
 		$product_id = $product_data["id"];
+		$quantity = 0;
 		$element="
-    		<div class=\"col-md-4 col-sm-6 my-3 my-md\">
-				<form action=\"mike_farm.php\" method=\"post\">
+
+    		<div class=\"col-md-4 col-sm-6 my-3 my-md \">
+				<form action=\"cart.php\" method=\"post\">
 					<div class=\"card shadow my-3\">
 						<div>
-							<img src=\"$product_image\" alt=\"product image\" class=\"img-fluid card-img-top img-responsive\">
+							<img src=\"$product_image\" id=\"product_image\" alt=\"product image\" class=\"img-thumbnail card-img-top img-responsive\">
 						</div>
 						<div class=\"card-body my-3\">
 							<h5 class=\"card-title\">$product_name</h5>
@@ -54,6 +57,7 @@ function component(){
 							<h5>
 								<span class=\"price\">$product_price</span>
 							</h5>
+							
 							<button type=\"submit\" class=\"btn btn-warning my-3\" name=\"add\">Add to cart <i class=\"fas fa-shopping-cart\"></i></button>
 							<input type=\"hidden\" name=\"product_id\" value=\"$product_id\">
 						</div>
@@ -62,7 +66,8 @@ function component(){
 			</div>
     	";
     	echo $element;
-		
+
+
 	 }
     
 }
@@ -72,13 +77,6 @@ function component(){
     
 
 
-// function getData(){
-//     $sql="SELECT * FROM products";
-//     $result = mysqli_query($connection, $sql);
-//     if(mysqli_num_rows($result)>0){
-//         return $result;
-//     }
-// }
             
         
 

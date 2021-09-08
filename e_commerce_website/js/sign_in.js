@@ -3,9 +3,7 @@ $(document).ready(function(){
     var emailValid;
     var confirmPass;
    
-    // $("#submit").click(function(){
-    //     alert($("last_name").val());
-    // })
+   
     $("#submitt").click(function(){
         validateEmail();
         confirmPassword();
