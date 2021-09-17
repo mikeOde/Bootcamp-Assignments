@@ -21,13 +21,15 @@ $stmt1-> bind_param("ss",$email,$hash);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
 $row1 = $result1->fetch_assoc();
+$user_id = $row1["id"];
 
 if(empty($row1)){
     session_start();
     $_SESSION["flash"] = "Please check your Email and password";
     header('location:../index.php');
 }else{
-        header('location:../user_home.php');
+        $_SESSION["user_id"] = $user_id;
+        header('location:../user_home.html');
     }
 
 ?>
