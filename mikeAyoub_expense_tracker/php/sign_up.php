@@ -49,7 +49,7 @@ if(empty($row)){
     $stmt2 = $connection->prepare($sql2);
     $stmt2->bind_param("ssss", $first_name, $last_name, $email, $hash);
     $stmt2->execute();
-    header('location: ../login.php');
+    header('location: ../index.php');
 }else{
     header('location: ../signup.php');
 }

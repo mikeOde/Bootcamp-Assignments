@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>APIs</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<button id="add_btn" type="button" style="margin: 1%;" class="btn btn-success">Add New Article</button>
+				<div class="table100 ver1 m-b-110">
+				    
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">ID</th>
+									<th class="cell100 column2">Name</th>
+									<th class="cell100 column3">Author</th>
+									<th class="cell100 column4">Published Date</th>
+									<th> </th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table id="articles_table" >
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<script>
+	
+	$(document).ready(getArticles);
+
+	function deleteArticle(){
+		deleteArticleAPI().then(response => {
+			//check the response
+			//hide the row that has this id 
+		});
+	}
+	
+	function getArticles(){
+		getArticlesAPI().then(articles => {
+			$.each(articles, function(index, article){
+				var $tr = $('<tr>').append(
+					$('<td>').text(article.id).addClass("cell100 column1"),
+					$('<td>').text(article.name).addClass("cell100 column2"),
+					$('<td>').text(article.author).addClass("cell100 column3"),
+					$('<td>').text(article.published).addClass("cell100 column4"),
+					$('<td>').append("<button type='button' id='delete_" + article.id + "' class='btn btn-danger deleteBtn'>Delete</button>")
+				).addClass("row100 body").appendTo("#articles_table");
+			})
+			$("#add_btn").click(addArticle);
+			$(".deleteBtn").click(deleteArticle);
+		});
+	}
+	
+	function addArticle(){
+		addArticleAPI().then(article => {
+			var $tr = $('<tr>').append(
+				$('<td>').text(article.id).addClass("cell100 column1"),
+				$('<td>').text(article.name).addClass("cell100 column2"),
+				$('<td>').text(article.author).addClass("cell100 column3"),
+				$('<td>').text(article.published).addClass("cell100 column4"),
+				$('<td>').append("<button type='button' id='delete_" + article.id + "' class='btn btn-danger deleteBtn'>Delete</button>")
+			).addClass("row100 body").appendTo("#articles_table");
+			$(".deleteBtn").click(deleteArticle);
+		});
+	}
+	
+	
+	async function getArticlesAPI(){
+		const response = await fetch("http://fsw.devel/table/get_articles.php");
+		
+		if(!response.ok){
+			const message = "ERROR OCCURED";
+			throw new Error(message);
+		}
+		
+		const articles = await response.json();
+		return articles;
+	}
+	
+	async function addArticleAPI(){
+		const response = await fetch("http://fsw.devel/table/add_article.php", {
+			method: 'POST',
+			body: new URLSearchParams({
+				"name": "Article from JS API",
+				"author": "JS API",
+				"published": "2021-12-12",
+			})
+		});
+		
+		if(!response.ok){
+			const message = "ERROR OCCURED";
+			throw new Error(message);
+		}
+		
+		const article = await response.json();
+		return article;
+	}
+	
+	async function deleteArticleAPI(){
+		const response = await fetch("http://fsw.devel/table/delete_article.php?id=" + 7);
+		
+		if(!response.ok){
+			const message = "ERROR OCCURED";
+			throw new Error(message);
+		}
+		
+		const article = await response.json();
+		return article;
+	}
+		
+	
+	</script>
+
+
+
+</body>
+</html>

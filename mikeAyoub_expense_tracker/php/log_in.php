@@ -24,11 +24,12 @@ $row1 = $result1->fetch_assoc();
 $user_id = $row1["id"];
 
 if(empty($row1)){
+    session_start();
     $_SESSION["flash"] = "Please check your Email and password";
-    header('location:../login.php');
+    header('location:../index.php');
 }else{
         $_SESSION["user_id"] = $user_id;
-        header('location:../index.html');
+        header('location:../user_home.html');
     }
 
 ?>
