@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Project</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/iofrm-style.css">
+    <link rel="stylesheet" type="text/css" href="css/iofrm-theme12.css">
+</head>
+<body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="index.html">
+                                <div class="logo">
+                                    <img class="logo-size" src="images/logo-light.svg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <h3>Facebook</h3>
+                        <p>Click to Connect</p>
+                        <div class="page-links">
+                            <a href="login.html">Login</a><a href="register.html" class="active">Register</a>
+                        </div>
+                        <form id="register_form" action="php/registration.php" method="post">
+                            <label for="first_name"><b>Enter Your Info</b></label>
+                            <input class="form-control" type="text"  id="full_name" name="fullName" placeholder="Full Name" required minlength="3">
+                            <input class="form-control" type="email" id="email" name="userEmail" placeholder="E-mail Address" required minlength="7">
+                            <input class="form-control" type="date" id ="birthday" name="userBirthday" placeholder="Birthday" required>
+                            <label for="county"><b>Also Your Address</b></label>
+                            <input class="form-control" type="text" id="country" name="userCountry" placeholder="Country" required>
+                            <input class="form-control" type="text" id="city" name="userCity" placeholder="City" required>
+                            <input class="form-control" type="text" id="street" name="userStreet" placeholder="Street" required>
+                            <label for="password"><b>You're Almost There!</b></label>
+                            <input class="form-control" type="password" id="password" name="userPassword" placeholder="Password" required minlength="8">
+                            <input class="form-control" type="password" id="confirm_password" name="confirmPassword" placeholder="Confirm Password" required minlength="8">
+                            <div class="form-button">
+                                <button id="submit_btn" type="button" class="ibtn">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/register.js"></script>
+</body>
+
+</html>
