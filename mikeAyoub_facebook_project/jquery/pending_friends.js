@@ -1,5 +1,5 @@
-$(document).ready(async function(){
-    await displayFriendsRequests();
+$(document).ready(function(){
+    displayFriendsRequests();
     $(".acceptBtn").click(async function(){                            //adds an event listener to the accept friend button
         var id_to_accept = $(this).attr("id").substr($(this).attr("id").indexOf("_") + 1);   // targets the id of the user to add as a friend
         //console.log(id_to_accept);
