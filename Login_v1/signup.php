@@ -62,7 +62,7 @@ if (isset($_POST['sign_up'])) {
 
   	$_SESSION['user_name'] = $user_name;
   	$_SESSION['success'] = "You are now logged in";
-  	header('location: page.php/');
+  	header('location: index.html');
   }
 }
 ?>
